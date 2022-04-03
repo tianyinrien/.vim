@@ -125,6 +125,7 @@ imap ,f <esc>ji
 imap ,d <esc>ki
 imap ,s <esc>ha
 imap ,g <esc>la
+imap ,q <esc>0i
 
 autocmd Filetype tex imap ,e <esc>/<++><CR>:nohlsearch<CR>c4l
 autocmd Filetype tex imap ,r $ <--> $<++><esc>?<--><CR>N:nohlsearch<CR>c4l
