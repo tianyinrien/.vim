@@ -5,8 +5,8 @@ set number
 
 set relativenumber
 
-set laststatus=0
-set statusline+=%#LineNr#
+""set laststatus=0
+""set statusline+=%#LineNr#
 
 "set clipboard=unnamedplus
 
@@ -93,7 +93,7 @@ let mapleader=" "
 map <LEADER>/ :!
 
 
-map <LEADER>rc :e ~/.vimrc<CR>
+map <LEADER>rc :e ~/.config/nvim/init.vim<CR>
 
 map <LEADER><CR> :nohlsearch<CR>		
 
@@ -107,6 +107,11 @@ map sh :set splitright<CR>:vsplit<CR>
 map sl :set nosplitright<CR>:vsplit<CR>
 map sj :set splitright<CR>:split<CR>
 map sk :set nosplitright<CR>:split<CR>
+
+map <LEADER>tt :NERDTreeToggle<CR>
+map <LEADER>tf :FZF<CR>
+map <LEADER>u :UndotreeToggle<CR>
+
 
 
 map <LEADER>f <C-w>l
@@ -130,19 +135,24 @@ call plug#begin()
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'honza/vim-snippets'
 Plug 'lervag/vimtex'
-Plug 'ludovicchabant/vim-gutentags'
 Plug 'morhetz/gruvbox'
-Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-surround' 
 Plug 'Chiel92/vim-autoformat'
 Plug 'doy/vim-autobrace'
 Plug 'w0rp/ale'
 Plug 'easymotion/vim-easymotion'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'ctrlpvim/ctrlp.vim', { 'on': 'CtrlP' }
-"Plug 'gkapfham/vim-vitamin-onec'
+Plug 'kshenoy/vim-signature'
+Plug 'mbbill/undotree'
+Plug 'vim-airline/vim-airline'
+Plug 'airblade/vim-gitgutter'
+Plug 'junegunn/fzf.vim'
+Plug 'liuchengxu/vim-which-key'
+"Plug 'Xuyuanp/nerdtree-git-plugin'
+"Plug 'ludovicchabant/vim-gutentags'
+"Plug 'ctrlpvim/ctrlp.vim', { 'on': 'CtrlP' }
 call plug#end()
+
 
 colorscheme gruvbox
 set background=dark 
@@ -150,23 +160,35 @@ hi Visual term=reverse cterm=reverse guibg=Grey
 
 let g:vimtex_view_method = 'zathura'
 let g:vimtex_compiler_method = 'latexmk'
-let maplocalleader = "."
+let g:vimtex_imaps_leader = "'"
+let maplocalleader = " "
 
 "easymotion
 let g:EasyMotion_do_mapping = 0
 nmap <LEADER>c <Plug>(easymotion-overwin-f2)
 
-""nmap <LEADER>w <Plug>(easymotion-overwin-w)
 
-""nmap <LEADER>r <Plug>(easymotion-w)
+"spell check
+set spell spelllang=en_us
+set nospell
+nmap <LEADER>p :set nospell<CR>
+nmap <LEADER>o :set spell<CR>
 
-""let g:EasyMotion_smartcase = 1
+nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 
-""map <LEADER>f <Plug>(easymotion-j)
-""map <LEADER>d <Plug>(easymotion-k)
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
 
-
-map tf :NERDTreeToggle<CR>
-
-map tt :CtrlP<CR>
-
+  " unicode symbols
+  let g:airline_left_sep = '▶'
+  let g:airline_right_sep = '◀'
+  let g:airline_symbols.colnr = ' ℅ '
+  let g:airline_symbols.crypt = ' 🔒'
+  let g:airline_symbols.maxlinenr = ''
+  let g:airline_symbols.branch = '⎇'
+  let g:airline_symbols.paste = 'Þ'
+  let g:airline_symbols.spell = ''
+  let g:airline_symbols.notexists = 'Ɇ'
+  let g:airline_symbols.whitespace = ' Ξ '
+  let g:airline_symbols.linenr = ' ☰ '
